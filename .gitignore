@@ -1,3 +1,6 @@
+# Keep files
+!data/raw/dados_ibovespa.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
