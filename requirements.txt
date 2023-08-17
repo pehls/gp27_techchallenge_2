@@ -104,9 +104,6 @@ pyparsing==3.0.9
 python-dateutil==2.8.2
 python-dotenv==1.0.0
 python-json-logger==2.0.7
-pytz==2023.3
-pywin32==306
-pywinpty==2.0.11
 PyYAML==6.0.1
 pyzmq==25.1.0
 qtconsole==5.4.3
@@ -131,7 +128,6 @@ sphinxcontrib-htmlhelp==2.0.1
 sphinxcontrib-jsmath==1.0.1
 sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.5
--e git+https://github.com/pehls/gp27_techchallenge_2.git@1c3f39a0ec371109dd18ff44d4ac708a3fadc7c6#egg=src
 stack-data==0.6.2
 statsmodels==0.14.0
 ta==0.10.2
