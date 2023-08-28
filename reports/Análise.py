@@ -37,3 +37,16 @@ with tab_seasonal:
         generate_graphs._seasonal_decompose(get_data._series_for_seasonal()),
         use_container_width=True,
     )
+
+with tab_adf:
+    st.plotly_chart(
+        generate_graphs._grafico_adf(get_data._df_ibovespa()),
+        use_container_width=True,
+    )
+
+    st.divider()
+
+    st.plotly_chart(
+        generate_graphs._grafico_adf_diff(get_data._df_ibovespa()),
+        use_container_width=True,                                 
+    )
