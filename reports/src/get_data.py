@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import config
 import streamlit as st
+from statsmodels.tsa.stattools import adfuller
 
 from src.indicators import Indicators
 
@@ -45,5 +46,6 @@ def _series_for_seasonal():
     series = df['Close']
     series.index = pd.to_datetime(df['Date'])
     return series
-    
-    
+
+def _adfuller(series):
+    return adfuller(series)
