@@ -72,3 +72,17 @@ def _get_modelling_data(df = _df_ibovespa(), indicators=True,
                 .rename(columns={'Date':'ds', 'Adj Close':'y'})
     df['ds'] = pd.to_datetime(df['ds'])
     return df
+
+@st.cache_data
+def _get_data_for_models_ts():
+    df = _df_ibovespa()
+    df_ts = pd.DataFrame(df[['Data', 'Último']].values, columns=['ds', 'y'])
+    df_ts['unique_id'] = 'IBOV'
+    df_ts.sort_values('ds', inplace=True)
+
+    date_limit = '2023-01-01'
+    train = df.loc[df_ts.index < date_limit]
+    test = df.loc[df_ts.index >= date_limit]
+    h = test.index.nunique()
+
+    return train, test, h

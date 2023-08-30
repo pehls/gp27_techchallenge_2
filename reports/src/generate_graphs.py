@@ -1,8 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.tsa.seasonal import seasonal_decompose
-from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+from statsforecast import StatsForecast
+from statsforecast.models import AutoARIMA, SeasonalNaive, SeasonalWindowAverage
 from src.indicators import generate_graph
+import src.get_data as get_data 
 
 
 def _grafico_historico(df, crossovers):
@@ -39,8 +41,17 @@ def _adf_diff(df):
 
     return fig, df_ts.dropna()['close'].values
 
-def _grafico_acf(df):
-    return plot_acf(df['Close'])
+def _grafico_models_ts():
+    train, test, h = get_data._get_data_for_models_ts()
+    
+    model_all = StatsForecast(models=[
+        SeasonalNaive(season_length=7),
+        SeasonalWindowAverage(season_length=7, window_size=2),
+        AutoARIMA(season_length=7)], freq='D', n_jobs=-1)
+    
+    model_all.fit(train)
 
-# def _grafico_pacf(df):
-#     return plot_pacf(df['Close'])
+    forecast_all = model_all.predict(h=h)
+    forecast_all = forecast_all.reset_index().merge(test, on=['ds', 'unique_id'], how='left')
+
+    return model_all.plot(train, forecast_all, unique_ids=['IBOV'], engine='matplotlib')

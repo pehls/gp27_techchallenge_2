@@ -1,5 +1,6 @@
 import streamlit as st
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+from statsmodels.tsa.stattools import acf, pacf
 import src.generate_graphs as generate_graphs
 import src.get_data as get_data
 
@@ -23,7 +24,7 @@ st.info("""
 """)
         
 
-tab_grafico_historico, tab_seasonal, tab_adf, tab_acf = st.tabs(['Gráfico Histórico', 'Decompondo sazonalidade', 'Teste ADFuller', 'Autocorrelação - ACF/PACF'])
+tab_grafico_historico, tab_seasonal, tab_adf, tab_acf, tab_models = st.tabs(['Gráfico Histórico', 'Decompondo sazonalidade', 'Teste ADFuller', 'Autocorrelação - ACF/PACF', 'Modelos - Teste'])
 
 df_ibovespa = get_data._df_ibovespa()
 
@@ -92,15 +93,20 @@ with tab_adf:
     """)
 
 with tab_acf:
-    st.plotly_chart(
+    st.pyplot(
         plot_acf(df_ibovespa['Close'].values),
         use_container_width=True,
     )
 
     st.divider()
 
-    st.plotly_chart(
+    st.pyplot(
         plot_pacf(df_ibovespa['Close'].values),
         use_container_width=True,
     )
 
+with tab_models:
+    st.plotly_chart(
+        generate_graphs._grafico_models_ts(),
+        use_container_width=True,
+    )
