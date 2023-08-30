@@ -367,6 +367,7 @@ def generate_graph(df, crossovers, just_return = False, just_candles = True, hei
         ),
         row=1, col=1
     )
+    
     fig.add_trace(
         go.Scatter(x=df.index, y=df['Lower_Band'],#
                name='Lower BB', 
@@ -374,6 +375,7 @@ def generate_graph(df, crossovers, just_return = False, just_candles = True, hei
         ),
         row=1, col=1
     )
+    
     fig = fig.update_layout(xaxis_rangeslider_visible=False, xaxis={'visible':False, 'showticklabels':False})
     # volume bar chart
 
@@ -397,8 +399,10 @@ def generate_graph(df, crossovers, just_return = False, just_candles = True, hei
         row=2, col=1
 
     )
+    
     if (just_candles and just_return):
         return fig
+    
     # OBV
     fig.add_trace(
         go.Scatter(x=df.index, y=df.OBV,
@@ -420,6 +424,7 @@ def generate_graph(df, crossovers, just_return = False, just_candles = True, hei
                 colors_macd.append(DECREASING_COLOR)
         else:
             colors_macd.append(DECREASING_COLOR)
+    
     # add MACD HIST to graph
     fig.add_trace(
         go.Bar(x=df.index, y=df.MACD_Histogram,
@@ -428,6 +433,7 @@ def generate_graph(df, crossovers, just_return = False, just_candles = True, hei
         row=3, col=1
 
     )
+    
     # add 12-EMA
     fig.add_trace(
         go.Scatter(x=df.index, y=df.EMA_9,#
@@ -435,6 +441,7 @@ def generate_graph(df, crossovers, just_return = False, just_candles = True, hei
         row=4, col=1
 
     )
+    
     # add 26-EMA
     fig.add_trace(
         go.Scatter(x=df.index, y=df.SMA_21,#
@@ -452,18 +459,24 @@ def generate_graph(df, crossovers, just_return = False, just_candles = True, hei
               ),
         row=5, col=1
     )
+    
     fig.add_trace(
         go.Scatter(x=df.Datetime, y=df.MACD_Signal_line, 
                marker=dict(color="blue"), name='MACD Signal'
               ),
         row=5, col=1
     )
+    
     fig = fig.update_layout(yaxis={'visible':False, 'showticklabels':False})
+    
     fig = fig.update_layout(xaxis_rangeslider_visible=False)
+    
     fig.update_layout(
         autosize=False,
         width=width,
         height=height,)
+    
     if (just_return): 
         return fig
+    
     fig.show()
