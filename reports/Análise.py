@@ -44,6 +44,18 @@ with tab_seasonal:
         use_container_width=True,
     )
 
+    st.markdown("""
+        Ao tratarmos o periodo como 365, porém, notamos um comportamento sazonal mais evidente:
+    """)
+    st.plotly_chart(
+        generate_graphs._seasonal_decompose(get_data._series_for_seasonal(), 365),
+        use_container_width=True,
+    )
+    
+    st.markdown("""
+        Seria um sinal de que temos um comportamento cíclico anual, e uma tendência bem mais definida?
+                Nota-se que o gráfico de tendência está muito mais constante e conciso, com uma alta evidente até out/2022!
+    """)
 with tab_adf:
     grafico_adf, series_adf = generate_graphs._adf(df_ibovespa)
     res_adf = get_data._adfuller(series_adf)
