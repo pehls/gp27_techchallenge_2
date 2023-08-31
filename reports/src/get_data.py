@@ -88,3 +88,8 @@ def _get_data_for_models_ts():
     h = test.index.nunique()
 
     return train, test, h
+
+@st.cache_data
+def _trials():
+    return pd\
+        .read_csv(f'{config.BASE_PATH}/raw/trials.csv')

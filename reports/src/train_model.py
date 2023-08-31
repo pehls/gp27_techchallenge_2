@@ -5,6 +5,7 @@ from sklearn.metrics import (mean_absolute_error,
                              mean_squared_error, 
                              mean_absolute_percentage_error,
                              r2_score)
+import config
 
 def _train_simple_prophet(_df):
     _model = Prophet()
@@ -67,19 +68,13 @@ def _run_cv_prophet(df_model, params, n_splits = 5, test_size = 12,):
         })
     return _res, pd.DataFrame(_res).test_mape.mean()
 
+def _get_best_params():
+    import json
+    with open(f'{config.BASE_PATH}/raw/best_params.json', 'r') as file:
+        return json.load(file)
 
 def _train_cv_prophet(_df):
-    best_params = {
-            'changepoint_prior_scale': 0.3761195211249936, 
-            'changepoint_range': 0.49242363320586086, 
-            'holidays_prior_scale': 9.951019013077275, 
-            'seasonality_mode': 'additive', 
-            'seasonality_prior_scale': 8.829642980386694, 
-            'daily_seasonality': True, 
-            'weekly_seasonality': True, 
-            'yearly_seasonality': 365,
-            'regressors': '',
-        }
+    best_params = _get_best_params()
     train_end = pd.to_datetime('2023-01-01')
     X_train = _df.loc[_df.ds < train_end]
     X_test = _df.loc[_df.ds >= train_end]

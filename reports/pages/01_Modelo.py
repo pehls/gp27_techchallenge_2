@@ -1,5 +1,5 @@
 import streamlit as st
-from src import get_data, train_model
+from src import get_data, train_model, generate_graphs
 from prophet.plot import plot_plotly, plot_components_plotly
 from sklearn.metrics import (mean_absolute_error, 
                              mean_squared_error, 
@@ -111,19 +111,32 @@ with tab_hiperparametrizacao:
         Com tais configurações, chegamos ao seguinte melhor resultado:
     """)   
 
-    st.code("""         
-        best_params = {
-            'changepoint_prior_scale': 0.3761195211249936, 
-            'changepoint_range': 0.49242363320586086, 
-            'holidays_prior_scale': 9.951019013077275, 
-            'seasonality_mode': 'additive', 
-            'seasonality_prior_scale': 8.829642980386694, 
-            'daily_seasonality': True, 
-            'weekly_seasonality': True, 
-            'yearly_seasonality': 365,
-            'regressors': '',
-        }
-    """)
+    st.code("best_params = "+str(train_model._get_best_params()).replace(",",",\n\t\t"), language='python')
+
+    st.markdown("""        
+        Para melhor visualizar o resultado da hiperparametrização, podemos verificar no seguinte gráfico, as áreas onde temos espaços mais
+        "pretos", onde estão concentrados os resultados com menor erro percentual; Nota-se que existem vários "vales" de bons resultados, onde
+        nossa hiperparametrização poderia ter retornado bons parâmetros;
+        Para modificar o parâmetro sendo analisado, basta selecionar abaixo:
+    """)   
+    trials_df = get_data._trials()
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        hyperparam_1 = st.selectbox(
+            'Hiperparâmetro 1',
+            list(set(trials_df.columns) - set(['loss']))
+        )
+    with col2:    
+        hyperparam_2 = st.selectbox(
+            'Hiperparâmetro 2',
+            list(set(trials_df.columns) - set(['loss']))
+        )
+
+    st.plotly_chart(
+        generate_graphs._plot_trials(trials_df, hyperparam_1, hyperparam_2)
+    )
 
     _model, X_test, pred, X_train, forecast_ = train_model._train_cv_prophet(df)
     second_mape = round(mean_absolute_percentage_error(X_test['y'].values, pred['yhat'].values)*100, 3)
