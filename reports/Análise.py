@@ -1,13 +1,7 @@
 import streamlit as st
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-from statsmodels.tsa.stattools import acf, pacf
 import src.generate_graphs as generate_graphs
 import src.get_data as get_data
-
-st.set_page_config(
-    page_title="Tech Challenge #02 - Grupo 27",
-    layout="wide"
-)
 
 st.write("""
     # Tech Challenge #02 - Grupo 27 
@@ -106,7 +100,27 @@ with tab_acf:
     )
 
 with tab_models:
+    st.markdown("""
+        Antes de partirmos para o algoritmo selecionado para gerar o modelo, realizamos alguns testes com algoritmos
+        para séries temporais
+        
+        Os algoritmos da lib `statsforecast` são:
+        - SeasonalNaive
+        - SeasonalWindowAverage
+        - AutoARIMA
+    """)
+
+    graph, mape_seas_naive, mape_seas_wa, mape_arima = generate_graphs._models_ts()
     st.plotly_chart(
-        generate_graphs._grafico_models_ts(),
+        graph,
         use_container_width=True,
     )
+
+    st.markdown(f"""
+        Para avaliação utilizamos `sklearn.metrics.mean_average_percentage_error` e os resultados são listados abaixo:
+        - MAPE SeasonalNaive: {mape_seas_naive}
+        - MAPE SeasonalWindowAverage: {mape_seas_wa}
+        - MAPE AutoARIMA: {mape_arima}
+
+        Na página [Modelo](Modelo) aprofundamos mais a análise do algoritmo `prophet`.
+    """)

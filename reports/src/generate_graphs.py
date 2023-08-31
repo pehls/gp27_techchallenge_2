@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsforecast import StatsForecast
 from statsforecast.models import AutoARIMA, SeasonalNaive, SeasonalWindowAverage
+from sklearn.metrics import mean_absolute_percentage_error
 from src.indicators import generate_graph
 import src.get_data as get_data 
 
@@ -41,7 +42,7 @@ def _adf_diff(df):
 
     return fig, df_ts.dropna()['close'].values
 
-def _grafico_models_ts():
+def _models_ts():
     train, test, h = get_data._get_data_for_models_ts()
     
     model_all = StatsForecast(models=[
@@ -53,5 +54,11 @@ def _grafico_models_ts():
 
     forecast_all = model_all.predict(h=h)
     forecast_all = forecast_all.reset_index().merge(test, on=['ds', 'unique_id'], how='left')
+    forecast_all.dropna(inplace=True)
 
-    return model_all.plot(train, forecast_all, unique_ids=['IBOV'], engine='matplotlib')
+    mape_seas_naive = mean_absolute_percentage_error(forecast_all['y'].values, forecast_all['SeasonalNaive'].values)
+    mape_seas_wa = mean_absolute_percentage_error(forecast_all['y'].values, forecast_all['SeasWA'].values)
+    mape_arima = mean_absolute_percentage_error(forecast_all['y'].values, forecast_all['AutoARIMA'].values)
+    graph = model_all.plot(train, forecast_all, unique_ids=['IBOV'], engine='plotly') 
+
+    return graph, mape_seas_naive, mape_seas_wa, mape_arima
