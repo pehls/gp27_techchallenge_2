@@ -55,6 +55,18 @@ with tab_conceitos:
         conceitos mais avançados para melhorar o desempenho de nossa previsão:
                 
         #### Validação Cruzada com Time Series Split
+                
+        Esta é uma técnica usada para avaliar o desempenho de modelos de aprendizado de máquina em dados de séries temporais. 
+                
+        A diferença para dessa técnica para a validação cruzada tradicional, onde os dados são embaralhados aleatoriamente, na validação cruzada com divisão de séries temporais, a ordem temporal dos dados é mantida, pois a dependência temporal é crucial em séries temporais.
+
+        Sobre o processo:
+
+        1. O 1º passo envolve a divisão do conjunto de dados em vários blocos ou dobras, onde cada bloco subsequente contém observações temporais mais recentes;
+        2. Após isso, treinamos o modelo em cada conjunto de treinamento (treino)
+        3. Na sequência avaliamos seu desempenho no conjunto de teste correspondente (teste). A métrica de avaliação é registrada para cada dobra.
+
+        Com isso, teremos várias métricas de desempenho para cada dobra. Isso nos ajudará a entender como o modelo se comporta em diferentes períodos da série temporal e se ele consegue generalizar bem para dados futuros.
     """)
     st.image("https://www.kaggleusercontent.com/kf/50808689/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..tVZyFZd7IlyTsDrLi_TosQ.jWh6fFzrp9Vakt4OkuHZd5IUKgm3H4yip9jAPinkqJnAt9uxVKVRlDyj_ovJbvQOCQ3dSqV4lk1bXKLsVRZoLnbb0iRWnWSvLc3gnXxchP1jyYe4gOdA-4w2SJRcmxglrcPS1nBdWu4w1oUB04FBDDflpJRoiDGonzAfjV_GSa2vf7RpA0nwLxuYuPllRfA0ka-VggM2jVKsrtuXnCGqKr1nKyVBwz_aKzsauB923-dFDNsHVrqwkX1xOFGpjM0B9DNHYu1UNXrSuZYxTzSCAVG6vMvwpYmAokZDphjs4VqD-rI1ePypXTuDBQ9MW3Ef5iWH_b7jbWlqYKCrVhggDK0-dmeYIs4D_FMJk2HtXznjzfvv_bqkE8bn6CEpM2dvv2j9aVQ8wMicH1IoNhExf1kMnP28CJ_SQSj0nUQQKnTRDRTOaYiEdzVkzAl_CQgLgzxHhDUKdisTUpuidm-rnJTk3xK_RT5tapbGWJ025gInD_kaKpR1ubRzNa2YYXcMidmnWcK8nJAtRsyHw0EO3StlY0u91OeNZQohRde5FLpGaqacUQVgHQHZWXhDJT1HE91AlI3G9n2DEDvB7NVgm-6Wkqnp4xSWkndUsmonvHfbUIBsPlFQH9hIBogllfavqHYz5hBAdraKIoAo6Yij-JiFLn7d6Hz7CfVTWQTW5WI.yqL8_aruoGUh1reTxb6Fgw/__results___files/__results___7_1.png",
             caption="Time Series Split",
@@ -63,10 +75,18 @@ with tab_conceitos:
 
     st.markdown(f"""     
         #### Adição de feriados na modelagem do Prophet
+                
+        A adição de feriados na modelagem do Prophet (que já possui um mecanismo embutido para lidar esses eventos sazonais, como, por exemplo, os feriados) é uma técnica usada para melhorar a precisão das previsões em séries temporais ao levar em consideração esses eventos.
+
+        Essa implementação permitirá o modelo ajustar seus componentes de sazonalidade e tendência conforme os padrões observados nos dados de feriados passados, resultando em previsões mais precisas em relação a esses eventos especiais.
     """)
+    
     st.markdown(f"""            
         #### Hiperparametrização Bayesiana
                 
+        É uma abordagem para encontrar os melhores hiperparâmetros ( configurações que não são aprendidas diretamente pelo algoritmo durante o treinamento, mas afetam como o modelo é treinado e como faz previsões) para para um modelo de machine learning.
+
+        Ela utiliza modelos probabilísticos e estatísticos para prever como diferentes configurações afetarão o desempenho do modelo. Em vez de tentar todas as combinações possíveis (o que pode ser computacionalmente caro), ela usa um modelo substituto para guiar a busca, focando nas combinações mais promissoras e equilibrando a exploração do que não conhece com o aproveitamento do que já foi aprendido.        
     """)
 
 with tab_hiperparametrizacao:
