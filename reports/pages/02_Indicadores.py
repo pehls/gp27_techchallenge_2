@@ -1,6 +1,10 @@
 import streamlit as st
+import src.generate_graphs as generate_graphs
+import src.get_data as get_data
 
 st.title('Indicadores')
+
+st.info('Complementando nossa análise, utilizamos os três indicadores abaixo para entender o comportamento dos dados')
 
 tab_bb, tab_rsi, tab_macd = st.tabs(['Bolling Bands', 'RSI', 'MACD'])
 
@@ -9,6 +13,11 @@ with tab_bb:
         A utilização das Bandas de Bollinger em nosso modelo visa identificar momentos de alta volatilidade e possíveis pontos de reversão. 
         Isso é essencial para entender os cenários em que o mercado pode estar passando por mudanças substanciais, permitindo-nos ajustar nossas previsões para refletir a volatilidade atual.
     """)
+
+    st.pyplot(
+        generate_graphs._grafico_bb(get_data._calculate_bollinger_bands()),
+        use_container_width=True,
+    )
 
     st.markdown("""
         Tomando como exemplo o gráfico de 2022, a partir da análise com bandas de bollinger podem nos indicar sinais de reversão da tendência atual. 
@@ -26,6 +35,11 @@ with tab_rsi:
         permitindo que nosso modelo identifique esses pontos e ajuste suas previsões.
     """)
 
+    st.pyplot(
+        generate_graphs._grafico_rsi(get_data._calculate_rsi()),
+        use_container_width=True,
+    )
+
     st.markdown("""
         O RSI é varia entre 0 e 100. Tradicionalmente, valores acima de 70 indicam uma condição de sobrecompra, 
         sugerindo que o ativo pode estar prestes a sofrer uma reversão de baixa. 
@@ -39,6 +53,11 @@ with tab_macd:
         Isso nos permite ajustar nossas previsões com base em mudanças abruptas ou gradualidades na evolução dos preços, 
         contribuindo para uma compreensão mais abrangente da dinâmica do mercado.
     """)
+
+    st.pyplot(
+        generate_graphs._grafico_macd(get_data._calculate_macd()),
+        use_container_width=True,
+    )
 
     st.markdown("""
         #Quando há cruzamentos entre o MACD e a linha de sinal (o MACD cruza acima ou abaixo da linha de sinal) e esse cruzamento 

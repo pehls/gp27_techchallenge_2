@@ -93,3 +93,45 @@ def _get_data_for_models_ts():
 def _trials():
     return pd\
         .read_csv(f'{config.BASE_PATH}/raw/trials.csv')
+
+@st.cache_data
+def _calculate_bollinger_bands(window=20, num_std=2):
+    df = _df_ibovespa()
+    rolling_mean = df['Close'].rolling(window=window).mean()
+    rolling_std = df['Close'].rolling(window=window).std()
+
+    df['Upper_Band'] = rolling_mean + num_std * rolling_std
+    df['Lower_Band'] = rolling_mean - num_std * rolling_std
+
+    return df
+
+@st.cache_data
+def _calculate_rsi(period=20):
+    df = _df_ibovespa()
+
+    delta = df['Close'].diff()
+
+    gain = delta.where(delta > 0, 0)
+    loss = -delta.where(delta < 0, 0)
+
+    avg_gain = gain.rolling(window=period).mean()
+    avg_loss = loss.rolling(window=period).mean()
+
+    rs = avg_gain / avg_loss
+    df['RSI'] = 100 - (100 / (1 + rs))
+
+    return df
+
+@st.cache_data
+def _calculate_macd(short_window=12, long_window=26, signal_window=9):
+    df = _df_ibovespa()
+
+    short_ema = df['Close'].ewm(span=short_window, min_periods=1, adjust=False).mean()
+    long_ema = df['Close'].ewm(span=long_window, min_periods=1, adjust=False).mean()
+
+    macd = short_ema - long_ema
+    df['MACD'] = macd
+    df['Signal_Line'] = macd.ewm(span=signal_window, min_periods=1, adjust=False).mean()
+
+    return df
+
