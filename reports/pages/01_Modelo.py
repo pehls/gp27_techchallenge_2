@@ -67,14 +67,19 @@ with tab_conceitos:
         2. Após isso, treinamos o modelo em cada conjunto de treinamento (treino)
         3. Na sequência avaliamos seu desempenho no conjunto de teste correspondente (teste). A métrica de avaliação é registrada para cada dobra.
 
-        Com isso, teremos várias métricas de desempenho para cada dobra. Isso nos ajudará a entender como o modelo se comporta em diferentes períodos da série temporal e se ele consegue generalizar bem para dados futuros.
     """)
-    st.image(rf"{config.ROOT}\reports\figures\time_series_cv.png",
-            caption="Time Series Split",
-            width=600,
-    )
+    col1, col2, col3 = st.columns(3)
+    with col2:
+        st.image(config.TIME_SERIES_SPLIT_IMG,
+                caption="Time Series Split",
+                width=300,  
+        )
 
     st.markdown(f"""     
+        Com isso, teremos várias métricas de desempenho para cada dobra. Isso nos ajudará a entender como o modelo se comporta em diferentes períodos da série temporal 
+        e se ele consegue generalizar bem para dados futuros.
+                
+
         #### Adição de feriados na modelagem do Prophet
                 
         A adição de feriados na modelagem do Prophet (que já possui um mecanismo embutido para lidar esses eventos sazonais, como, por exemplo, os feriados) é uma técnica usada para melhorar a precisão das previsões em séries temporais ao levar em consideração esses eventos.
