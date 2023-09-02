@@ -172,7 +172,7 @@ with tab_hiperparametrizacao:
     second_r2 = round(r2_score(X_train['y'].values, 
                           forecast_.loc[forecast_.ds.isin(X_train.ds.to_list())]['yhat'].values)
                 , 4)
-    sec_melhoria_mape = round(second_mape - baseline_mape, 2)
+    sec_melhoria_mape = abs(round(second_mape - baseline_mape, 2))
 
 with tab_hiperparametrizacao_resultados:
     st.plotly_chart(
@@ -189,6 +189,6 @@ with tab_hiperparametrizacao_resultados:
         e um R2 (medida de ajuste na etapa de treinamento) de 
         **{second_r2}**.
 
-        Tais resultados, mostram uma melhoria de {sec_melhoria_mape}% em mape, em porcentagem absoluta!
+        Tais resultados, mostram uma melhoria de {sec_melhoria_mape}% em mape (considerando {baseline_mape}% como o anterior), em porcentagem absoluta!
                 
     """)
