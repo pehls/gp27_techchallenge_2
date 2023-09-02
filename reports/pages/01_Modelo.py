@@ -1,4 +1,5 @@
 import streamlit as st
+import config
 from src import get_data, train_model, generate_graphs
 from prophet.plot import plot_plotly, plot_components_plotly
 from sklearn.metrics import (mean_absolute_error, 
@@ -68,7 +69,7 @@ with tab_conceitos:
 
         Com isso, teremos várias métricas de desempenho para cada dobra. Isso nos ajudará a entender como o modelo se comporta em diferentes períodos da série temporal e se ele consegue generalizar bem para dados futuros.
     """)
-    st.image("https://www.kaggleusercontent.com/kf/50808689/eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..tVZyFZd7IlyTsDrLi_TosQ.jWh6fFzrp9Vakt4OkuHZd5IUKgm3H4yip9jAPinkqJnAt9uxVKVRlDyj_ovJbvQOCQ3dSqV4lk1bXKLsVRZoLnbb0iRWnWSvLc3gnXxchP1jyYe4gOdA-4w2SJRcmxglrcPS1nBdWu4w1oUB04FBDDflpJRoiDGonzAfjV_GSa2vf7RpA0nwLxuYuPllRfA0ka-VggM2jVKsrtuXnCGqKr1nKyVBwz_aKzsauB923-dFDNsHVrqwkX1xOFGpjM0B9DNHYu1UNXrSuZYxTzSCAVG6vMvwpYmAokZDphjs4VqD-rI1ePypXTuDBQ9MW3Ef5iWH_b7jbWlqYKCrVhggDK0-dmeYIs4D_FMJk2HtXznjzfvv_bqkE8bn6CEpM2dvv2j9aVQ8wMicH1IoNhExf1kMnP28CJ_SQSj0nUQQKnTRDRTOaYiEdzVkzAl_CQgLgzxHhDUKdisTUpuidm-rnJTk3xK_RT5tapbGWJ025gInD_kaKpR1ubRzNa2YYXcMidmnWcK8nJAtRsyHw0EO3StlY0u91OeNZQohRde5FLpGaqacUQVgHQHZWXhDJT1HE91AlI3G9n2DEDvB7NVgm-6Wkqnp4xSWkndUsmonvHfbUIBsPlFQH9hIBogllfavqHYz5hBAdraKIoAo6Yij-JiFLn7d6Hz7CfVTWQTW5WI.yqL8_aruoGUh1reTxb6Fgw/__results___files/__results___7_1.png",
+    st.image(f"{config.ROOT}/reports/figures/time_series_cv.png",
             caption="Time Series Split",
             width=600,
     )

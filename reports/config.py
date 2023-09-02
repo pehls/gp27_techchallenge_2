@@ -1,3 +1,3 @@
 from pathlib import Path
-
-BASE_PATH = Path.cwd() / 'data'
+ROOT = Path.cwd()
+BASE_PATH = ROOT / 'data'
