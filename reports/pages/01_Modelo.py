@@ -69,7 +69,7 @@ with tab_conceitos:
 
         Com isso, teremos várias métricas de desempenho para cada dobra. Isso nos ajudará a entender como o modelo se comporta em diferentes períodos da série temporal e se ele consegue generalizar bem para dados futuros.
     """)
-    st.image(f"{config.ROOT}/reports/figures/time_series_cv.png",
+    st.image(rf"{config.ROOT}\reports\figures\time_series_cv.png",
             caption="Time Series Split",
             width=600,
     )
@@ -85,9 +85,12 @@ with tab_conceitos:
     st.markdown(f"""            
         #### Hiperparametrização Bayesiana
                 
-        É uma abordagem para encontrar os melhores hiperparâmetros ( configurações que não são aprendidas diretamente pelo algoritmo durante o treinamento, mas afetam como o modelo é treinado e como faz previsões) para para um modelo de machine learning.
+        É uma abordagem para encontrar os melhores hiperparâmetros ( configurações que não são aprendidas diretamente pelo algoritmo durante o treinamento, 
+        mas afetam como o modelo é treinado e como faz previsões) para um modelo de machine learning.
 
-        Ela utiliza modelos probabilísticos e estatísticos para prever como diferentes configurações afetarão o desempenho do modelo. Em vez de tentar todas as combinações possíveis (o que pode ser computacionalmente caro), ela usa um modelo substituto para guiar a busca, focando nas combinações mais promissoras e equilibrando a exploração do que não conhece com o aproveitamento do que já foi aprendido.        
+        Ela utiliza modelos probabilísticos e estatísticos para prever como diferentes configurações afetarão o desempenho do modelo.
+        Em vez de tentar todas as combinações possíveis (o que pode ser computacionalmente caro), ela usa um modelo substituto para guiar a busca, 
+        focando nas combinações mais promissoras e equilibrando a exploração do que não conhece com o aproveitamento do que já foi aprendido.        
     """)
 
 with tab_hiperparametrizacao:
