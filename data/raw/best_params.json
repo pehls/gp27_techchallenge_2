@@ -1,1 +1,10 @@
-{"changepoint_prior_scale": 0.4030199609492991, "changepoint_range": 0.49598580369644063, "daily_seasonality": false, "holidays_prior_scale": 7.70077859535738, "regressors": "", "seasonality_mode": "additive", "seasonality_prior_scale": 9.242234393358348, "weekly_seasonality": true, "yearly_seasonality": 365}
+{
+    "changepoint_prior_scale": 0.3951172456831963, 
+    "changepoint_range": 0.4779239428151924, 
+    "daily_seasonality": true, 
+    "holidays_prior_scale": 8.437350099616326, 
+    "regressors": "",
+    "seasonality_mode": "additive", 
+    "seasonality_prior_scale": 6.352152057407995, 
+    "weekly_seasonality": false, 
+    "yearly_seasonality": 365}
