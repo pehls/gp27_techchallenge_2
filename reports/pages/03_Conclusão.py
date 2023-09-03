@@ -24,6 +24,7 @@ st.markdown("""
             
     2. Melhoria na Precisão do Prophet:
         - A análise do Prophet mostra uma melhoria de 4.07% no MAPE em relação ao valor anterior (11.02% para 6.95%). Isso indica que as alterações feitas na hiperparametrização tiveram um impacto positivo na precisão do modelo.
+        - Com o prophet nós temos a possibilidade de definir variáveis na modelagem para um melhor ajuste do modelo às características específicas dos dados. Isso é uma vantagem significativa, pois permite que levemos em consideração fatores externos que podem afetar as previsões e melhorem a precisão do modelo.
 
     E com este modelo, ao longo dos próximos meses, podemos:
             
